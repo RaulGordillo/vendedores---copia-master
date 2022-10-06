@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <!--Incio de la barra de navegación-->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #990066;">
+        <div class="container-fluid">
+          <a class="navbar-brand" th:href="@{/principal}">                  
+            
+            Sistema de gestión de ventas</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a
+                th:href="@{/vendedor}"
+                class="nav-link active"
+                aria-current="page"                
+                >Gestión de usuario</a
+              >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!--Final de la barra de navegación-->
+      <main class="mis-productos">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <section class="page-header">
+                <div class="container">
+                    <br>
+                  <h1 style="color: #990066;">Catálogo</h1>
+                  <br>
+                </div>
+              </section>
+              <section>
+                <div class="search-bar">
+                  <input type="text" placeholder="Buscar" />
+                  <img src="assets/img/search-icon.png" alt="" />
+                  <a th:href="@{/vendedor/new}" class="btn btn-primary"
+                    >Crear artículo</a
+                  >
+                  <br>
+                  <br>
+                </div>
+              </section>
+            </div>
+          </div>
+          <div class="row row-cols-1 row-cols-md-3 g-4" >
+            <div class="col" th:each="vendedor: ${vendedor}">
+              <div class="card h-100">
+                <img th:src="${vendedor.photosImagePath}" class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title" th:text="${vendedor.name}"></h5>
+                  <p class="card-text" th:text="${vendedor.coments}"> </p>
+                  <h5 th:text="${vendedor.precio}"></h5>
+                </div>
+                <div class="card-footer">
+                  <a th:with="baseUrl = 'https://wa.me/57' + ${vendedor.telefono} + '?text=' + 'Estoy interesado en: ' + ${vendedor.name}" th:href="@{${baseUrl}}" class="btn btn-warning">Contactar al vendedor</a>
+                </div>
+              </div>
+            </div>
+            <div>
+              </div>
+              <div class="navbar navbar-inverse navbar-fixed-bottom">
+                <div class="container">
+                  <p class="navbar-text">@ReusaCol tienda de garage virtual</p>
+                </div>
+              </div> 
+
+</body>
+</html>
